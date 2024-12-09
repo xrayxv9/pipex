@@ -1,0 +1,47 @@
+===========================================================================================================
+ /$$$$$$$\ /$$$$$\ /$$$$$$$\ /$$$$$$$$| /$$$$$$\ 
+| $$__  $$|_  $$_/| $$__  $$| $$_____/ /$$__  $$|
+| $$  \ $$  | $$  | $$  \ $$| $$      | $$  \__/
+| $$$$$$$/  | $$  | $$$$$$$/| $$$$$   |  $$$$$$ 
+| $$____/   | $$  | $$____/ | $$__/    \____  $$
+| $$        | $$  | $$      | $$       /$$  \ $$
+| $$       /$$$$$$| $$      | $$$$$$$$|  $$$$$$/
+|__/      |______/|__/      |________/ \______/ 
+===========================================================================================================
+Pipes.
+
+les pipes servent a connecter des fichiers entre eux
+
+les pipes sont dans la librairie 
+#include <unistd.h>
+
+Les pipes servent a transmettre des infos a ecrire ou lire ? 
+d'un process a un autre.
+De plus, une pipe est unidirectionnel
+signifiant que je ne peut pas aller dans les deux sens
+
+pour clarifier aller voir :
+	man pipe
+
+pour un petit code de test :
+	https://people.cs.rutgers.edu/~pxk/416/notes/c-tutorials/pipe.html
+
+===========================================================================================================
+  /$$$$$$  /$$   /$$  /$$$$$$   /$$$$$$$ /$$    /$$ /$$$$$$       
+ /$$__  $$|  $$ /$$/ /$$__  $$ /$$_____/|  $$  /$$//$$__  $$      
+| $$$$$$$$ \  $$$$/ | $$$$$$$$| $$       \  $$/$$/| $$$$$$$$      
+| $$_____/  >$$  $$ | $$_____/| $$        \  $$$/ | $$_____/      
+|  $$$$$$$ /$$/\  $$|  $$$$$$$|  $$$$$$$   \  $/  |  $$$$$$$      
+ \_______/|__/  \__/ \_______/ \_______/    \_/    \_______/      
+===========================================================================================================
+execve.
+
+#include <unistd.h>
+execute le programme demande au chemin 
+Lorsque la commande s'exec, l'environnement se reset
+donc la heap, la stack et tout le patatra
+j'en deduis donc qu'il vaut mieux potentiollement faire une fork juste avant de faire la commande
+cette fonction a besoin du chemin de destination de la commande qu'il souhaite exec
+
+man :
+	man execve
