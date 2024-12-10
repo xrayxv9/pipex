@@ -45,3 +45,75 @@ cette fonction a besoin du chemin de destination de la commande qu'il souhaite e
 
 man :
 	man execve
+
+===========================================================================================================
+                         /$$   /$$               /$$       /$$
+                        |__/  | $$              |__/      | $$
+ /$$  /$$  /$$  /$$$$$$  /$$ /$$$$$$    /$$$$$$  /$$  /$$$$$$$
+| $$ | $$ | $$ |____  $$| $$|_  $$_/   /$$__  $$| $$ /$$__  $$
+| $$ | $$ | $$  /$$$$$$$| $$  | $$    | $$  \ $$| $$| $$  | $$
+| $$ | $$ | $$ /$$__  $$| $$  | $$ /$$| $$  | $$| $$| $$  | $$
+|  $$$$$/$$$$/|  $$$$$$$| $$  |  $$$$/| $$$$$$$/| $$|  $$$$$$$
+ \_____/\___/  \_______/|__/   \___/  | $$____/ |__/ \_______/
+                                      | $$                    
+                                      | $$                    
+                                      |__/                    
+===========================================================================================================
+waitpid
+
+#include <sys/wait.h>
+
+waitpid est utilise pour attendre le changement d'etat d'un child process un child process
+si aucun wait n'est fais, le process deviens un process "zombie"
+
+
+man :
+	man waitpid
+
+
+
+===========================================================================================================
+                     /$$ /$$           /$$      
+                    | $$|__/          | $$      
+ /$$   /$$ /$$$$$$$ | $$ /$$ /$$$$$$$ | $$   /$$
+| $$  | $$| $$__  $$| $$| $$| $$__  $$| $$  /$$/
+| $$  | $$| $$  \ $$| $$| $$| $$  \ $$| $$$$$$/ 
+| $$  | $$| $$  | $$| $$| $$| $$  | $$| $$_  $$ 
+|  $$$$$$/| $$  | $$| $$| $$| $$  | $$| $$ \  $$
+ \______/ |__/  |__/|__/|__/|__/  |__/|__/  \__/
+===========================================================================================================
+unlink.
+
+#include <unistd.h>
+
+commande pour fermer une pipe
+
+man : 
+	man 2 unlink
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+NOTE DE FIN DE PAGE:
+
+il n'y a pas plusieurs process qui peuvent etre fais en meme temps
+cette impression est seulement du au myltitasking operating system,
+en gros c'est lui qui gere qui passe en premier dans les process.
+
+
+
+zombie process :
+	un process qui est fini mais qui a toujours une place dans la process table
