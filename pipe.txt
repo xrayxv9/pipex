@@ -93,18 +93,13 @@ man :
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
+===========
+a voir
+tenter de faire une cvommande mais seulement dans une fork
+de la sorte je verrais si je garde mes valeurs de variables.
+bpn courrage ensuite juste voir pour faire ecrire l'output d'une commande dans un file
+voir quel et le nom suppose du file, si il dois ou non deja existe
+sinon je dois le creer moi meme
 
 
 NOTE DE FIN DE PAGE:
@@ -117,3 +112,6 @@ en gros c'est lui qui gere qui passe en premier dans les process.
 
 zombie process :
 	un process qui est fini mais qui a toujours une place dans la process table
+
+env :
+	env est la commande permettant de voir tout les PATH des variables d'environnement
