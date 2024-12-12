@@ -1,20 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test.c                                             :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: xray <xray@42angouleme.fr>                 +#+  +:+       +#+        */
+/*   By: cmorel <cmorel@42angouleme.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/10 23:09:30 by xray              #+#    #+#             */
-/*   Updated: 2024/12/11 01:55:45 by xray             ###   ########.fr       */
+/*   Created: 2024/10/08 11:32:53 by cmorel            #+#    #+#             */
+/*   Updated: 2024/10/08 11:32:55 by cmorel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include <unistd.h>
-#include <sys/wait.h>
-#include <stdio.h>
 
-int main (void)
+#include "libft.h"
+
+size_t	ft_strlen(const char *s)
 {
-	char *argv[3] = {"ls", NULL, NULL}; 
-    execv("/bin/ls", argv);
+	size_t	i;
+
+	i = 0;
+	while (s[i])
+		i++;
+	return (i);
 }
