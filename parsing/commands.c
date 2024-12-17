@@ -1,24 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.h                                          :+:      :+:    :+:   */
+/*   commands.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cmorel <cmorel@42angouleme.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/12 12:46:13 by cmorel            #+#    #+#             */
-/*   Updated: 2024/12/17 11:47:04 by cmorel           ###   ########.fr       */
+/*   Created: 2024/12/17 10:34:24 by cmorel            #+#    #+#             */
+/*   Updated: 2024/12/17 15:09:30 by cmorel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#ifndef PARSING_H
-# define PARSING_H
+#include "parsing.h"
 
-# include <stdlib.h>
-# include <unistd.h>
-# include <stdio.h>
-# include "../includes/libft/libft.h"
+int	ft_len(char **av)
+{
+	int	i;
 
-char	**get_paths(char **env);
+	i = 0;
+	while (av[i])
+		i++;
+	return (i);
+}
 
-char	**cmd(char *av);
+char	**cmd(char *av)
+{
+	char	**command;
 
-#endif
+	command = ft_split(av, ' ');
+}

@@ -1,24 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.h                                          :+:      :+:    :+:   */
+/*   core.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cmorel <cmorel@42angouleme.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/12 12:46:13 by cmorel            #+#    #+#             */
-/*   Updated: 2024/12/17 11:47:04 by cmorel           ###   ########.fr       */
+/*   Created: 2024/12/17 16:27:23 by cmorel            #+#    #+#             */
+/*   Updated: 2024/12/17 16:40:15 by cmorel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#ifndef PARSING_H
-# define PARSING_H
+#include "core.h"
 
-# include <stdlib.h>
-# include <unistd.h>
-# include <stdio.h>
-# include "../includes/libft/libft.h"
+int	core(char **av)
+{
+	int	fd;
 
-char	**get_paths(char **env);
 
-char	**cmd(char *av);
-
-#endif
+}

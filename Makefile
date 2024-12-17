@@ -10,7 +10,7 @@ YELLOW = \033[33m
 BLUE = \033[38;2;15;101;214m
 RESET = \033[0m
 
-LIBFT_DIR = include/libft/
+LIBFT_DIR = includes/libft/
 PRINTF = $(LIBFT_DIR)/libft.a
 
 OBJ_PATH = obj/
@@ -20,23 +20,25 @@ SRC_PATH = src/
 
 SRC = main.c
 # UTIL = push_rotate.c
-# PARSING = parsing.c ft_utils_node_remains.c ft_utils_node.c parsing2.c gen_utils.c ft_itoa.c
+PARSING = path.c commands.c
+LIBFT_FILE = libft.a
 
 SRCS = $(addprefix $(SRC_PATH), $(SRC))
-# PARSINGS = $(addprefix $(PARSING_PATH), $(PARSING))
+PARSINGS = $(addprefix $(PARSING_PATH), $(PARSING))
 # UTILS = $(addprefix $(UTIL_PATH), $(UTIL))
 
-# OBJ = $(PARSING:.c=.o)
+OBJ_PARSING = $(PARSING:.c=.o)
 # OBJ_UTIL = $(UTIL:.c=.o)
 OBJ_SRC = $(SRC:.c=.o)
 # OBJ_SORT = $(SORT:.c=.o)
 
-# OBJS = $(addprefix $(OBJ_PATH), $(OBJ))
+OBJS_PARSING = $(addprefix $(OBJ_PATH), $(OBJ_PARSING))
 # OBJS_UTIL = $(addprefix $(OBJ_PATH), $(OBJ_UTIL))
 OBJS_SRC = $(addprefix $(OBJ_PATH), $(OBJ_SRC))
 # OBJS_SORT = $(addprefix $(OBJ_PATH), $(OBJ_SORT))
+LIBFT_LIB	=	$(addprefix $(LIBFT_DIR), $(LIBFT_FILE))
 
-$(libft):
+$(LIBFT):
 	@make --no-print-directory -C $(LIBFT_DIR)
 
 all: $(NAME)
@@ -48,11 +50,11 @@ all: $(NAME)
 	@echo " | |    _| |_| |    | |____ / . \ "
 	@echo " |_|   |_____|_|    |______/_/ \_\\"
 
-$(NAME): $(OBJS_SRC)
-	@$(CC) $(CFLAGS) $(OBJS_SRC) -o $@
+$(NAME): $(OBJS_SRC) $(OBJS_PARSING) $(LIBFT)
+	@$(CC) $(CFLAGS) $(OBJS_SRC) $(OBJS_PARSING) $(LIBFT_LIB) -o $@
 
-# $(OBJ_PATH)%.o: $(PARSING_PATH)%.c
-# 	@$(CC) $(CFLAGS) -c $< -o $@
+$(OBJ_PATH)%.o: $(PARSING_PATH)%.c
+	@$(CC) $(CFLAGS) -c $< -o $@
 #
 # $(OBJ_PATH)%.o: $(UTIL_PATH)%.c
 # 	@$(CC) $(CFLAGS) -c $< -o $@

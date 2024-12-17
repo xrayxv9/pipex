@@ -6,12 +6,12 @@
 /*   By: cmorel <cmorel@42angouleme.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 12:02:37 by cmorel            #+#    #+#             */
-/*   Updated: 2024/10/15 15:54:10 by cmorel           ###   ########.fr       */
+/*   Updated: 2024/12/16 11:22:20 by cmorel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "libft.h"
 
-static void	free_all(char **t)
+void	free_all(char **t)
 {
 	char	**tmp;
 
