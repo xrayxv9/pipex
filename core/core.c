@@ -6,7 +6,7 @@
 /*   By: cmorel <cmorel@42angouleme.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 16:27:23 by cmorel            #+#    #+#             */
-/*   Updated: 2024/12/18 13:27:50 by xray             ###   ########.fr       */
+/*   Updated: 2024/12/18 16:49:23 by xray             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "core.h"
@@ -19,7 +19,7 @@ int	core(char **av, char **paths)
 	i = 1;
 	(void)paths;
 	fd = in(av[i]);
-
+	
 	close(fd);
 	return (1);
 }

@@ -6,11 +6,27 @@
 /*   By: cmorel <cmorel@42angouleme.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 12:42:29 by cmorel            #+#    #+#             */
-/*   Updated: 2024/12/17 10:32:21 by cmorel           ###   ########.fr       */
+/*   Updated: 2024/12/18 16:27:09 by xray             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "parsing.h"
 #include <stdlib.h>
+
+char	**reformat_all(char **s)
+{
+	int		i;
+	char	*tmp;
+
+	i = 0;
+	while (s[i])
+	{
+		tmp = ft_strjoin(s[i], "/");
+		free(s[i]);
+		s[i] = tmp;
+		i++;
+	}
+	return (s);
+}
 
 char	*reformat(char *s)
 {
@@ -51,5 +67,6 @@ char	**get_paths(char **env)
 		i++;
 	}
 	paths[0] = reformat(paths[0]);
+	paths = reformat_all(paths);
 	return (paths);
 }

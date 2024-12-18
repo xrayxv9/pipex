@@ -22,7 +22,7 @@ CORE_PATH = core/
 SRC_PATH = src/
 
 SRC = main.c
-CORE = core.c file_handle.c
+CORE = core.c file_handle.c command_handle.c
 PARSING = path.c commands.c
 
 SRCS = $(addprefix $(SRC_PATH), $(SRC))

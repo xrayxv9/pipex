@@ -1,28 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   core.h                                             :+:      :+:    :+:   */
+/*   command_handle.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: xray <xray@42angouleme.fr>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/18 10:47:38 by xray              #+#    #+#             */
-/*   Updated: 2024/12/18 16:03:21 by xray             ###   ########.fr       */
+/*   Created: 2024/12/18 13:59:13 by xray              #+#    #+#             */
+/*   Updated: 2024/12/18 16:34:18 by xray             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#ifndef CORE_H
-# define CORE_H
+#include "core.h"
 
-# include <unistd.h>
-# include <stdlib.h>
-# include <fcntl.h>
-# include <stdio.h>
-# include "../includes/libft/libft.h"
+char	*does_exist(char *cmd, char **paths)
+{
+	char	*join;
+	int		i;
 
-int	in(char *file);
-
-int	core(char **av, char **paths);
-
-char	*does_exist(char *cmd, char **paths);
-
-
-#endif 
+	i = 0;
+	if (!access(cmd, X_OK))
+		return (cmd);
+	while (paths[i])
+	{
+		join = ft_strjoin(paths[i], cmd);
+		if (!access(join, X_OK))
+			return (join);
+		free(join);
+		i++;
+	}
+	return (NULL);
+}
