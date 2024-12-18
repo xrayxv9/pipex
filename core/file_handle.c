@@ -1,26 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   core.h                                             :+:      :+:    :+:   */
+/*   file_handle.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: xray <xray@42angouleme.fr>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/18 10:47:38 by xray              #+#    #+#             */
-/*   Updated: 2024/12/18 12:22:53 by xray             ###   ########.fr       */
+/*   Created: 2024/12/18 11:35:51 by xray              #+#    #+#             */
+/*   Updated: 2024/12/18 12:19:37 by xray             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#ifndef CORE_H
-# define CORE_H
+#include "core.h"
 
-# include <unistd.h>
-# include <stdlib.h>
-# include <fcntl.h>
-# include <stdio.h>
-# include "../includes/libft/libft.h"
-
-int	in(char *file);
-
-int	core(char **av, char **paths);
-
-
-#endif 
+int	in(char *file)
+{
+	int	fd;
+	int	pi[2];
+	
+	fd = open(file, O_RDONLY);
+	if (fd < 0)
+	{
+		ft_putstr_fd("The file couldn't be opened", 2);
+		if (pipe(pi) < 0)
+		{
+			perror("pipe didn't succeed");
+			return (-1);
+		}
+		close(pi[1]);
+		return (pi[0]);
+	}
+	
+	return (fd);
+}

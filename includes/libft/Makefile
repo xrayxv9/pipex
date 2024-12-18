@@ -28,9 +28,9 @@ clean :
 	@rm -f $(OBJ) $(B_OBJ)
 
 fclean : clean
-	rm -f $(NAME)
+	@rm -f $(NAME)
 
 bonus : $(OBJ) $(B_OBJ)
-	ar -rcs $(NAME) (BONUS) $(B_OBJ)
+	@ar -rcs $(NAME) (BONUS) $(B_OBJ)
 
 re : fclean all

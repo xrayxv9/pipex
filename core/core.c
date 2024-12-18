@@ -6,14 +6,20 @@
 /*   By: cmorel <cmorel@42angouleme.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 16:27:23 by cmorel            #+#    #+#             */
-/*   Updated: 2024/12/17 16:40:15 by cmorel           ###   ########.fr       */
+/*   Updated: 2024/12/18 13:27:50 by xray             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "core.h"
 
-int	core(char **av)
+int	core(char **av, char **paths)
 {
 	int	fd;
+	int	i;
+	
+	i = 1;
+	(void)paths;
+	fd = in(av[i]);
 
-
+	close(fd);
+	return (1);
 }

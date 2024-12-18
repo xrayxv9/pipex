@@ -11,35 +11,34 @@ BLUE = \033[38;2;15;101;214m
 RESET = \033[0m
 
 LIBFT_DIR = includes/libft/
-PRINTF = $(LIBFT_DIR)/libft.a
+LIBFT_FILE = libft.a
+
+PRINTF_DIR = includes/printf/
+PRINTF_FILE = libftprintf.a
 
 OBJ_PATH = obj/
 PARSING_PATH = parsing/
-UTIL_PATH = utils/
+CORE_PATH = core/
 SRC_PATH = src/
 
 SRC = main.c
-# UTIL = push_rotate.c
+CORE = core.c file_handle.c
 PARSING = path.c commands.c
-LIBFT_FILE = libft.a
 
 SRCS = $(addprefix $(SRC_PATH), $(SRC))
 PARSINGS = $(addprefix $(PARSING_PATH), $(PARSING))
-# UTILS = $(addprefix $(UTIL_PATH), $(UTIL))
+CORES = $(addprefix $(CORE_PATH), $(CORE))
 
 OBJ_PARSING = $(PARSING:.c=.o)
-# OBJ_UTIL = $(UTIL:.c=.o)
+OBJ_CORE = $(CORE:.c=.o)
 OBJ_SRC = $(SRC:.c=.o)
-# OBJ_SORT = $(SORT:.c=.o)
 
 OBJS_PARSING = $(addprefix $(OBJ_PATH), $(OBJ_PARSING))
-# OBJS_UTIL = $(addprefix $(OBJ_PATH), $(OBJ_UTIL))
+OBJS_CORE = $(addprefix $(OBJ_PATH), $(OBJ_CORE))
 OBJS_SRC = $(addprefix $(OBJ_PATH), $(OBJ_SRC))
-# OBJS_SORT = $(addprefix $(OBJ_PATH), $(OBJ_SORT))
-LIBFT_LIB	=	$(addprefix $(LIBFT_DIR), $(LIBFT_FILE))
 
-$(LIBFT):
-	@make --no-print-directory -C $(LIBFT_DIR)
+LIBFT_LIB = $(addprefix $(LIBFT_DIR), $(LIBFT_FILE))
+PRINTF_LIB = $(addprefix $(PRINTF_DIR), $(PRINTF_FILE))
 
 all: $(NAME)
 	@echo ">>> $(BLUE)COMPILATION TERMINEE $(RESET)<<<"
@@ -50,14 +49,22 @@ all: $(NAME)
 	@echo " | |    _| |_| |    | |____ / . \ "
 	@echo " |_|   |_____|_|    |______/_/ \_\\"
 
-$(NAME): $(OBJS_SRC) $(OBJS_PARSING) $(LIBFT)
-	@$(CC) $(CFLAGS) $(OBJS_SRC) $(OBJS_PARSING) $(LIBFT_LIB) -o $@
+$(NAME): $(OBJS_SRC) $(OBJS_PARSING) $(OBJS_CORE) $(LIBFT_LIB) $(PRINTF_LIB)
+	@$(CC) $(CFLAGS) $(OBJS_SRC) $(OBJS_PARSING) $(OBJS_CORE) $(LIBFT_LIB) $(PRINTF_LIB) -o $@
+
+$(LIBFT_LIB):
+	@make --no-print-directory -C $(LIBFT_DIR)
+
+$(PRINTF_LIB):
+	@make --no-print-directory -C $(PRINTF_DIR)
 
 $(OBJ_PATH)%.o: $(PARSING_PATH)%.c
+	@mkdir -p $(OBJ_PATH)
 	@$(CC) $(CFLAGS) -c $< -o $@
-#
-# $(OBJ_PATH)%.o: $(UTIL_PATH)%.c
-# 	@$(CC) $(CFLAGS) -c $< -o $@
+
+$(OBJ_PATH)%.o: $(CORE_PATH)%.c
+	@mkdir -p $(OBJ_PATH)
+	@$(CC) $(CFLAGS) -c $< -o $@
 
 $(OBJ_PATH)%.o: $(SRC_PATH)%.c
 	@mkdir -p $(OBJ_PATH)
@@ -66,15 +73,17 @@ $(OBJ_PATH)%.o: $(SRC_PATH)%.c
 clean:
 	@echo ">>> $(RED)SUPPRESSION DES FICHIERS .o $(RESET)<<<"
 	@rm -rf $(OBJ_PATH)
-	@echo "$(RED)"
-	@echo "$(RESET)"
+	@make --no-print-directory -C $(LIBFT_DIR) clean
+	@make --no-print-directory -C $(PRINTF_DIR) clean
 
 fclean: clean
 	@echo ">>> $(RED)SUPPRESSION DE L'EXECUTABLE $(RESET)<<<"
-	@echo "\n"
 	@rm -f $(NAME)
-	
+	@make --no-print-directory -C $(LIBFT_DIR) fclean
+	@make --no-print-directory -C $(PRINTF_DIR) fclean
+
 re: fclean all
 	@echo "$(RESET)"
 
 .PHONY: all clean fclean re
+
