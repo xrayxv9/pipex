@@ -23,7 +23,7 @@ SRC_PATH = src/
 GNL_PATH = includes/NextLine/
 
 SRC = main.c
-CORE = core.c file_handle.c command_handle.c
+CORE = core.c file_handle.c command_handle.c setup.c
 PARSING = path.c
 GNL = get_next_line_bonus.c
 

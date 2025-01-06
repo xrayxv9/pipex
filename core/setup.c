@@ -1,23 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   setup.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cmorel <cmorel@42angouleme.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/08 11:32:53 by cmorel            #+#    #+#             */
-/*   Updated: 2024/10/08 11:32:55 by cmorel           ###   ########.fr       */
+/*   Created: 2025/01/06 11:31:46 by cmorel            #+#    #+#             */
+/*   Updated: 2025/01/06 17:25:53 by cmorel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+#include "core.h"
+#include <unistd.h>
 
-#include "libft.h"
-
-size_t	ft_strlen(const char *s)
+int	*setup(int i[4], int fd)
 {
-	size_t	i;
+	int p[2];
 
-	i = 0;
-	while (s[i])
-		i++;
+	pipe(p);
+	i[0] = fd;
+	i[1] = p[1];
+	i[2] = p[0];
 	return (i);
 }

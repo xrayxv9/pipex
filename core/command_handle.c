@@ -6,10 +6,11 @@
 /*   By: xray <xray@42angouleme.fr>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 13:59:13 by xray              #+#    #+#             */
-/*   Updated: 2025/01/06 09:01:15 by cmorel           ###   ########.fr       */
+/*   Updated: 2025/01/06 17:43:48 by cmorel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "core.h"
+#include <unistd.h>
 
 char	*does_exist(char *cmd, char **paths)
 {
@@ -36,8 +37,36 @@ char	*does_exist(char *cmd, char **paths)
 	return (NULL);
 }
 
-void	exec(char **command, char *cmd)
+int	exec(char **command, char *cmd, char **env, int fds[4])
 {
-	(void)command;
-	(void)cmd;
+	int	pid;
+
+	pid = fork();
+	if (pid == 0)
+	{
+		dup2(fds[0], 0);
+		dup2(fds[1], 1);
+		close_all(fds[0], fds[1], fds[2]);
+		execve(cmd, command, env);
+		return (-1);
+	}
+	close_all(fds[0], fds[1], -1);
+	return (pid);
+}
+
+int	final_exec(char **command, char *cmd, char **env, int fds[4])
+{
+	int pid;
+
+	pid = fork();
+	if (pid == 0)
+	{
+		dup2(fds[0], 0);
+		dup2(fds[1], 1);
+		close_all(fds[0], fds[1], fds[2]);
+		execve(cmd, command, env);
+		return (-1);
+	}
+	close_all(fds[0], fds[1], fds[2]);
+	return (pid);
 }

@@ -6,44 +6,76 @@
 /*   By: cmorel <cmorel@42angouleme.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 16:27:23 by cmorel            #+#    #+#             */
-/*   Updated: 2025/01/06 09:16:22 by cmorel           ###   ########.fr       */
+/*   Updated: 2025/01/06 17:43:42 by cmorel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "core.h"
 #include <unistd.h>
 
-void	main_loop(char **av, char **paths, int size)
+int	last_exec(char	**av, char **paths, int l[4], char **env)
+{
+	char	**command;
+	char	*cmd;
+	int		pid;
+	int		fd;
+	
+	fd = out(av[l[3] - 1]);
+	if (fd < 0)
+		return (-1);
+	l[0] = l[2];
+	l[1] = fd;
+	l[2] = -1;
+	pid = -1;
+	command = ft_split(av[l[3] - 3], ' ');	
+	cmd = does_exist(command[0], paths);
+	if (cmd)
+		pid = final_exec(command, cmd, env, l);
+	free_all(command);
+	free(cmd);
+	return (pid);
+}
+
+int	*main_loop(char **av, char **paths, int	l[4], char **env)
 {
 	char	**command;
 	char	*cmd;
 	int		i;
+	int		*pids;
 
+	pids = malloc((l[3] - 3) * sizeof(int));
+	pids[l[3] - 4] = -2;
 	i = 0;
-	while ((size - 4) > i)
+	setup(l, l[0]);
+	while ((l[3] - 4) > i)
 	{
 		command = ft_split(av[i + 2], ' ');	
 		cmd = does_exist(command[0], paths);
 		if (cmd)
-			exec(command, cmd);
+			pids[i] = exec(command, cmd, env, l);
+		printf("l[3] : %d\n", l[2]);
+		if (i < (l[3] - 5))
+			setup(l, l[2]);
 		free_all(command);
 		free(cmd);
 		i++;
 	}
+	close(l[2]);
+	pids[i] = last_exec(av, paths, l, env);
+	return (pids);
 }
 
-int	core(char **av, char **paths, const int size)
+int	*core(char **av, char **paths, const int size, char **env)
 {
 	int	fd;
 	int	i;
-	int	pids[size + 1];
-	
-	pids[size] = -2;
+	int	*pids;
+	int	l[4];
+
 	i = 1;
-	(void)paths;
 	fd = in(av[i]);
-	dup2(fd, 0);
-	close(fd);
+	l[0] = fd;
+	l[3] = size;
 	i++;
-	main_loop(av, paths, size);
-	return (1);
+	pids = main_loop(av, paths, l, env);
+	return (pids);
 }
