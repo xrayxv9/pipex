@@ -6,7 +6,7 @@
 /*   By: xray <xray@42angouleme.fr>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 13:59:13 by xray              #+#    #+#             */
-/*   Updated: 2024/12/19 15:55:51 by cmorel           ###   ########.fr       */
+/*   Updated: 2025/01/06 09:01:15 by cmorel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "core.h"
@@ -17,8 +17,12 @@ char	*does_exist(char *cmd, char **paths)
 	int		i;
 
 	i = 0;
+	if (!cmd)
+		return (NULL);
 	if (!access(cmd, X_OK))
 		return (ft_strdup(cmd));
+	if (!paths)
+		return (NULL);
 	if (!(*paths))
 		return (NULL);
 	while (paths[i])
@@ -30,4 +34,10 @@ char	*does_exist(char *cmd, char **paths)
 		i++;
 	}
 	return (NULL);
+}
+
+void	exec(char **command, char *cmd)
+{
+	(void)command;
+	(void)cmd;
 }

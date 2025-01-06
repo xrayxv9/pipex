@@ -6,7 +6,7 @@
 /*   By: cmorel <cmorel@42angouleme.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 16:27:23 by cmorel            #+#    #+#             */
-/*   Updated: 2024/12/19 15:56:38 by cmorel           ###   ########.fr       */
+/*   Updated: 2025/01/06 09:16:22 by cmorel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "core.h"
@@ -22,16 +22,14 @@ void	main_loop(char **av, char **paths, int size)
 	while ((size - 4) > i)
 	{
 		command = ft_split(av[i + 2], ' ');	
-		printf("test core\n");
 		cmd = does_exist(command[0], paths);
 		if (cmd)
-			printf("command : %s, cmd : %s\n\n", command[0], cmd);
+			exec(command, cmd);
 		free_all(command);
 		free(cmd);
 		i++;
 	}
 }
-
 
 int	core(char **av, char **paths, const int size)
 {
@@ -43,6 +41,8 @@ int	core(char **av, char **paths, const int size)
 	i = 1;
 	(void)paths;
 	fd = in(av[i]);
+	dup2(fd, 0);
+	close(fd);
 	i++;
 	main_loop(av, paths, size);
 	return (1);

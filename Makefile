@@ -20,22 +20,27 @@ OBJ_PATH = obj/
 PARSING_PATH = parsing/
 CORE_PATH = core/
 SRC_PATH = src/
+GNL_PATH = includes/NextLine/
 
 SRC = main.c
 CORE = core.c file_handle.c command_handle.c
-PARSING = path.c commands.c
+PARSING = path.c
+GNL = get_next_line_bonus.c
 
 SRCS = $(addprefix $(SRC_PATH), $(SRC))
 PARSINGS = $(addprefix $(PARSING_PATH), $(PARSING))
 CORES = $(addprefix $(CORE_PATH), $(CORE))
+GNLS = $(addprefix $(GNL_PATH), $(GNL))
 
 OBJ_PARSING = $(PARSING:.c=.o)
 OBJ_CORE = $(CORE:.c=.o)
 OBJ_SRC = $(SRC:.c=.o)
+OBJ_GNL = $(GNL:.c=.o)
 
 OBJS_PARSING = $(addprefix $(OBJ_PATH), $(OBJ_PARSING))
 OBJS_CORE = $(addprefix $(OBJ_PATH), $(OBJ_CORE))
 OBJS_SRC = $(addprefix $(OBJ_PATH), $(OBJ_SRC))
+OBJS_GNL = $(addprefix $(OBJ_PATH), $(OBJ_GNL))
 
 LIBFT_LIB = $(addprefix $(LIBFT_DIR), $(LIBFT_FILE))
 PRINTF_LIB = $(addprefix $(PRINTF_DIR), $(PRINTF_FILE))
@@ -49,8 +54,8 @@ all: $(NAME)
 	@echo " | |    _| |_| |    | |____ / . \ "
 	@echo " |_|   |_____|_|    |______/_/ \_\\"
 
-$(NAME): $(OBJS_SRC) $(OBJS_PARSING) $(OBJS_CORE) $(LIBFT_LIB) $(PRINTF_LIB)
-	@$(CC) $(CFLAGS) $(OBJS_SRC) $(OBJS_PARSING) $(OBJS_CORE) $(LIBFT_LIB) $(PRINTF_LIB) -o $@
+$(NAME): $(OBJS_SRC) $(OBJS_PARSING) $(OBJS_CORE) $(LIBFT_LIB) $(OBJS_GNL) $(PRINTF_LIB)
+	@$(CC) $(CFLAGS) $(OBJS_SRC) $(OBJS_PARSING) $(OBJS_CORE) $(OBJS_GNL) $(LIBFT_LIB) $(PRINTF_LIB) -o $@
 
 $(LIBFT_LIB):
 	@make --no-print-directory -C $(LIBFT_DIR)
@@ -59,6 +64,10 @@ $(PRINTF_LIB):
 	@make --no-print-directory -C $(PRINTF_DIR)
 
 $(OBJ_PATH)%.o: $(PARSING_PATH)%.c
+	@mkdir -p $(OBJ_PATH)
+	@$(CC) $(CFLAGS) -c $< -o $@
+
+$(OBJ_PATH)%.o: $(GNL_PATH)%.c
 	@mkdir -p $(OBJ_PATH)
 	@$(CC) $(CFLAGS) -c $< -o $@
 

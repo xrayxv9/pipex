@@ -1,28 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   get_next_line_bonus.h                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cmorel <cmorel@42angouleme.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/09 15:52:26 by cmorel            #+#    #+#             */
-/*   Updated: 2024/12/20 11:41:31 by cmorel           ###   ########.fr       */
+/*   Created: 2024/10/16 12:40:21 by cmorel            #+#    #+#             */
+/*   Updated: 2025/01/06 09:34:52 by cmorel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "../parsing/parsing.h"
-#include "../core/core.h"
+#ifndef GET_NEXT_LINE_BONUS_H
+# define GET_NEXT_LINE_BONUS_H
 
-int	main (int argc, char **argv, char **env)
-{
-	char	**paths;
+# include <unistd.h>
+# include <stdlib.h>
+# include <fcntl.h>
+# include "../libft/libft.h"
 
-	if (argc <= 4)
-		return (0);
-	if (!(*env))
-		paths = NULL;
-	else
-		paths = get_paths(env);
-	core(argv, paths, argc);
-	if (paths)
-		free_all(paths);
-}
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 10
+# endif
+
+char	*ft_checkline(char *buffer, int fd);
+
+char	*get_next_line(int fd);
+
+#endif

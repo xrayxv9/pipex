@@ -6,7 +6,7 @@
 /*   By: xray <xray@42angouleme.fr>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 10:47:38 by xray              #+#    #+#             */
-/*   Updated: 2024/12/19 15:47:14 by cmorel           ###   ########.fr       */
+/*   Updated: 2025/01/06 08:54:18 by cmorel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef CORE_H
@@ -19,11 +19,13 @@
 # include "../includes/libft/libft.h"
 # include "../parsing/parsing.h"
 
-int	in(char *file);
+int		in(char *file);
 
-int	core(char **av, char **paths, const int size);
+int		core(char **av, char **paths, const int size);
 
 char	*does_exist(char *cmd, char **paths);
+
+void	exec(char **command, char *cmd);
 
 
 #endif 
