@@ -6,7 +6,7 @@
 /*   By: cmorel <cmorel@42angouleme.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 16:27:23 by cmorel            #+#    #+#             */
-/*   Updated: 2025/01/07 10:31:07 by cmorel           ###   ########.fr       */
+/*   Updated: 2025/01/07 14:00:35 by cmorel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "core.h"
@@ -18,7 +18,7 @@ int	last_exec(char	**av, char **paths, int l[4], char **env)
 	char	*cmd;
 	int		pid;
 	int		fd;
-	
+
 	fd = out(av[l[3] - 1]);
 	if (fd < 0)
 		return (-1);
@@ -26,16 +26,15 @@ int	last_exec(char	**av, char **paths, int l[4], char **env)
 	l[1] = fd;
 	l[2] = -1;
 	pid = -1;
-	command = ft_split(av[l[3] - 2], ' ');	
+	command = ft_split(av[l[3] - 2], ' ');
 	cmd = does_exist(command[0], paths);
-	if (cmd)
-		pid = final_exec(command, cmd, env, l);
+	pid = final_exec(command, cmd, env, l);
 	free_all(command);
 	free(cmd);
 	return (pid);
 }
 
-int	*main_loop(char **av, char **paths, int	l[4], char **env)
+int	*main_loop(char **av, char **paths, int l[4], char **env)
 {
 	char	**command;
 	char	*cmd;
@@ -48,16 +47,10 @@ int	*main_loop(char **av, char **paths, int	l[4], char **env)
 	setup(l, l[0]);
 	while ((l[3] - 4) > i)
 	{
-		command = ft_split(av[i + 2], ' ');	
+		command = ft_split(av[i + 2], ' ');
 		cmd = does_exist(command[0], paths);
-		if (cmd)
-			pids[i] = exec(command, cmd, env, l);
-		if (!cmd && i < (l[3] - 5))
-		{
-			close_all(l[0], l[1], -1);
-			setup(l, l[2]);
-		}
-		else if (i < (l[3] - 5))
+		pids[i] = exec(command, cmd, env, l);
+		if (i < (l[3] - 5))
 			setup(l, l[2]);
 		free_all(command);
 		free(cmd);

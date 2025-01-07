@@ -6,7 +6,7 @@
 /*   By: xray <xray@42angouleme.fr>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 11:35:51 by xray              #+#    #+#             */
-/*   Updated: 2025/01/07 09:11:09 by cmorel           ###   ########.fr       */
+/*   Updated: 2025/01/07 14:00:54 by cmorel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "core.h"
@@ -16,7 +16,7 @@ int	in(char *file)
 {
 	int	fd;
 	int	pi[2];
-	
+
 	fd = open(file, O_RDONLY);
 	if (fd < 0)
 	{
@@ -34,7 +34,7 @@ int	in(char *file)
 
 int	out(char *file)
 {
-	int fd;
+	int	fd;
 
 	fd = open(file, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	if (fd < 0)

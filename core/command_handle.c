@@ -6,7 +6,7 @@
 /*   By: xray <xray@42angouleme.fr>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 13:59:13 by xray              #+#    #+#             */
-/*   Updated: 2025/01/07 10:34:00 by cmorel           ###   ########.fr       */
+/*   Updated: 2025/01/07 13:56:52 by cmorel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "core.h"
@@ -48,7 +48,7 @@ int	exec(char **command, char *cmd, char **env, int fds[4])
 		dup2(fds[1], 1);
 		close_all(fds[0], fds[1], fds[2]);
 		execve(cmd, command, env);
-		return (-1);
+		exit(1);
 	}
 	close_all(fds[0], fds[1], -1);
 	return (pid);
@@ -56,7 +56,7 @@ int	exec(char **command, char *cmd, char **env, int fds[4])
 
 int	final_exec(char **command, char *cmd, char **env, int fds[4])
 {
-	int pid;
+	int	pid;
 
 	pid = fork();
 	if (pid == 0)
@@ -65,7 +65,7 @@ int	final_exec(char **command, char *cmd, char **env, int fds[4])
 		dup2(fds[1], 1);
 		close_all(fds[0], fds[1], fds[2]);
 		execve(cmd, command, env);
-		return (-1);
+		exit(1);
 	}
 	close_all(fds[0], fds[1], fds[2]);
 	return (pid);

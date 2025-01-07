@@ -6,7 +6,7 @@
 /*   By: cmorel <cmorel@42angouleme.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 12:42:29 by cmorel            #+#    #+#             */
-/*   Updated: 2025/01/06 08:43:25 by cmorel           ###   ########.fr       */
+/*   Updated: 2025/01/07 14:01:18 by cmorel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "parsing.h"
@@ -56,7 +56,7 @@ char	**get_paths(char **env)
 	char	**paths;
 
 	i = 0;
-	paths = NULL;	
+	paths = NULL;
 	while (env[i])
 	{
 		if (ft_strnstr(env[i], "PATH", 4))
