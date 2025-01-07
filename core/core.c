@@ -6,7 +6,7 @@
 /*   By: cmorel <cmorel@42angouleme.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 16:27:23 by cmorel            #+#    #+#             */
-/*   Updated: 2025/01/07 09:08:52 by cmorel           ###   ########.fr       */
+/*   Updated: 2025/01/07 10:31:07 by cmorel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "core.h"
@@ -43,7 +43,7 @@ int	*main_loop(char **av, char **paths, int	l[4], char **env)
 	int		*pids;
 
 	pids = malloc((l[3] - 3) * sizeof(int));
-	pids[l[3] - 4] = -2;
+	fill(pids, l[3] - 3);
 	i = 0;
 	setup(l, l[0]);
 	while ((l[3] - 4) > i)
@@ -52,7 +52,12 @@ int	*main_loop(char **av, char **paths, int	l[4], char **env)
 		cmd = does_exist(command[0], paths);
 		if (cmd)
 			pids[i] = exec(command, cmd, env, l);
-		if (i < (l[3] - 5))
+		if (!cmd && i < (l[3] - 5))
+		{
+			close_all(l[0], l[1], -1);
+			setup(l, l[2]);
+		}
+		else if (i < (l[3] - 5))
 			setup(l, l[2]);
 		free_all(command);
 		free(cmd);

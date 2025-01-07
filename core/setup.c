@@ -6,7 +6,7 @@
 /*   By: cmorel <cmorel@42angouleme.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 11:31:46 by cmorel            #+#    #+#             */
-/*   Updated: 2025/01/07 08:43:25 by cmorel           ###   ########.fr       */
+/*   Updated: 2025/01/07 10:07:55 by cmorel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "core.h"
@@ -21,4 +21,16 @@ int	*setup(int i[4], int fd)
 	i[1] = p[1];
 	i[2] = p[0];
 	return (i);
+}
+
+void	fill(int *pids, int len)
+{
+	int	i;
+
+	i = 0;
+	while (i < len)
+	{
+		pids[i] = -1;
+		i++;
+	}
 }

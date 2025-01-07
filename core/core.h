@@ -6,7 +6,7 @@
 /*   By: xray <xray@42angouleme.fr>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 10:47:38 by xray              #+#    #+#             */
-/*   Updated: 2025/01/06 13:10:29 by cmorel           ###   ########.fr       */
+/*   Updated: 2025/01/07 09:44:44 by cmorel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef CORE_H
@@ -35,5 +35,7 @@ int		*setup(int i[4], int fd);
 int		out(char *file);
 
 int		final_exec(char **command, char *cmd, char **env, int fds[4]);
+
+void	fill(int *pids, int len);
 
 #endif 

@@ -6,7 +6,7 @@
 /*   By: xray <xray@42angouleme.fr>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 13:59:13 by xray              #+#    #+#             */
-/*   Updated: 2025/01/07 09:13:57 by cmorel           ###   ########.fr       */
+/*   Updated: 2025/01/07 10:34:00 by cmorel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "core.h"
@@ -42,7 +42,7 @@ int	exec(char **command, char *cmd, char **env, int fds[4])
 	int	pid;
 
 	pid = fork();
-	if (pid == 0)
+	if (cmd && pid == 0)
 	{
 		dup2(fds[0], 0);
 		dup2(fds[1], 1);

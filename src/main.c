@@ -6,7 +6,7 @@
 /*   By: cmorel <cmorel@42angouleme.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 15:52:26 by cmorel            #+#    #+#             */
-/*   Updated: 2025/01/07 09:12:22 by cmorel           ###   ########.fr       */
+/*   Updated: 2025/01/07 10:03:59 by cmorel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "../parsing/parsing.h"
@@ -21,10 +21,10 @@ void	free_all_pids(int	*pids, int	size)
 	i = 0;
 	while (i < size - 3)
 	{
+		printf("i. %d, pids[%d] = %d\n", i, i, pids[i]);
 		if (pids[i] >= 0)
 		{
 			waitpid(pids[i], &status, 0);
-			printf("i. %d, pids[%d] = %d\n", i, i, pids[i]);
 		}	
 		i++;
 	}
