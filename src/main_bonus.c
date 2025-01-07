@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   main_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cmorel <cmorel@42angouleme.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/09 15:52:26 by cmorel            #+#    #+#             */
-/*   Updated: 2025/01/07 14:18:10 by cmorel           ###   ########.fr       */
+/*   Created: 2025/01/07 14:03:39 by cmorel            #+#    #+#             */
+/*   Updated: 2025/01/07 15:14:24 by cmorel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "../parsing/parsing.h"
@@ -36,7 +36,7 @@ int	main(int argc, char **argv, char **env)
 	char	**paths;
 	int		*pids;
 
-	if (argc != 5)
+	if (argc < 5)
 		return (1);
 	if (!(*env))
 		paths = NULL;
