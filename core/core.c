@@ -6,7 +6,7 @@
 /*   By: cmorel <cmorel@42angouleme.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 16:27:23 by cmorel            #+#    #+#             */
-/*   Updated: 2025/01/06 17:43:42 by cmorel           ###   ########.fr       */
+/*   Updated: 2025/01/07 09:08:52 by cmorel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "core.h"
@@ -26,7 +26,7 @@ int	last_exec(char	**av, char **paths, int l[4], char **env)
 	l[1] = fd;
 	l[2] = -1;
 	pid = -1;
-	command = ft_split(av[l[3] - 3], ' ');	
+	command = ft_split(av[l[3] - 2], ' ');	
 	cmd = does_exist(command[0], paths);
 	if (cmd)
 		pid = final_exec(command, cmd, env, l);
@@ -52,14 +52,12 @@ int	*main_loop(char **av, char **paths, int	l[4], char **env)
 		cmd = does_exist(command[0], paths);
 		if (cmd)
 			pids[i] = exec(command, cmd, env, l);
-		printf("l[3] : %d\n", l[2]);
 		if (i < (l[3] - 5))
 			setup(l, l[2]);
 		free_all(command);
 		free(cmd);
 		i++;
 	}
-	close(l[2]);
 	pids[i] = last_exec(av, paths, l, env);
 	return (pids);
 }
