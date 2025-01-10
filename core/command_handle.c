@@ -6,11 +6,11 @@
 /*   By: xray <xray@42angouleme.fr>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 13:59:13 by xray              #+#    #+#             */
-/*   Updated: 2025/01/07 13:56:52 by cmorel           ###   ########.fr       */
+/*   Updated: 2025/01/10 11:00:20 by cmorel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "core.h"
-#include <unistd.h>
+#include <stdio.h>
 
 char	*does_exist(char *cmd, char **paths)
 {
@@ -41,7 +41,11 @@ int	exec(char **command, char *cmd, char **env, int fds[4])
 {
 	int	pid;
 
-	pid = fork();
+	pid = -1;
+	if (!cmd)
+		perror("Command not found");
+	else
+		pid = fork();
 	if (cmd && pid == 0)
 	{
 		dup2(fds[0], 0);

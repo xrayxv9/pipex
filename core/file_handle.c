@@ -6,7 +6,7 @@
 /*   By: xray <xray@42angouleme.fr>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 11:35:51 by xray              #+#    #+#             */
-/*   Updated: 2025/01/07 14:00:54 by cmorel           ###   ########.fr       */
+/*   Updated: 2025/01/08 10:29:38 by cmorel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "core.h"
@@ -20,7 +20,7 @@ int	in(char *file)
 	fd = open(file, O_RDONLY);
 	if (fd < 0)
 	{
-		ft_putstr_fd("The file couldn't be opened", 2);
+		ft_putstr_fd("The file couldn't be opened\n", 2);
 		if (pipe(pi) < 0)
 		{
 			perror("pipe didn't succeed");
@@ -32,13 +32,14 @@ int	in(char *file)
 	return (fd);
 }
 
-int	out(char *file)
+int	out(char *file, int i[4])
 {
 	int	fd;
 
 	fd = open(file, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	if (fd < 0)
 	{
+		close_all(i[0], i[1], i[2]);
 		ft_putstr_fd("The file couldn't be open successfully\n", 2);
 		return (-1);
 	}
